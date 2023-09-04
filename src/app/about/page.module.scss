@@ -1,0 +1,6 @@
+@use '../../styles/container';
+
+.about {
+  color: red;
+  @include container.page;
+}

@@ -1,7 +1,9 @@
-import NavBar from '@/components/nav-bar/nav-bar';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import styles from './layout.module.scss';
+
+import 'modern-normalize';
+import ThemeProvider from '../core/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,11 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={styles.root}>
       <body className={inter.className}>
-        <header className={styles.header}>
-          <NavBar />
-        </header>
-
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
