@@ -1,11 +1,24 @@
+@use '../../styles/colors';
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  height: 60px;
+  height: 3.75rem;
   background: rgb(2, 0, 36);
-  background: linear-gradient(270deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  background: colors.$blueGradient;
+  border-bottom: 1px solid grey;
+
+  .signUp {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .navbarMenuWrapper {
+    display: flex;
+    gap: 0.5rem;
+  }
 
   .navbarLogo {
     display: flex;

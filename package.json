@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fluentui/react-components": "^9.30.0",
+    "@fluentui/react-icons": "^2.0.222",
     "modern-normalize": "^2.0.0",
     "next": "13.4.12",
     "react": "18.2.0",

@@ -1,6 +1,6 @@
 'use client';
 
-import { Text, makeStyles, typographyStyles } from '@fluentui/react-components';
+import { Title1, makeStyles, typographyStyles } from '@fluentui/react-components';
 import pageStyles from '../page.module.scss';
 
 const useStyles = makeStyles({
@@ -11,10 +11,8 @@ export default function About() {
   const styles = useStyles();
 
   return (
-    <main className={pageStyles.about}>
-      <Text as="h1" block className={styles.title}>
-        About
-      </Text>
+    <main className={pageStyles.main}>
+      <Title1 as="h1">About</Title1>
 
       <div></div>
     </main>
