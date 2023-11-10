@@ -19,6 +19,9 @@ export default function NavBar() {
           <li className={styles.navbarMenuItem}>
             <Link href="/fixture">Fixture</Link>
           </li>
+          <li className={styles.navbarMenuItem}>
+            <Link href="/ladder">Ladder</Link>
+          </li>
         </ul>
       </div>
 
