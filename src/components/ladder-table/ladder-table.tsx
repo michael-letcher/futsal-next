@@ -1,6 +1,7 @@
 import { tableItems } from '@/app/data/constants';
 import {
   Avatar,
+  Button,
   DataGrid,
   DataGridBody,
   DataGridCell,
@@ -11,7 +12,7 @@ import {
   TableColumnDefinition,
   createTableColumn,
 } from '@fluentui/react-components';
-import { ArrowDownFilled, ArrowUpFilled, LineHorizontal1Filled } from '@fluentui/react-icons';
+import { ArrowDownFilled, ArrowUpFilled, EyeFilled, LineHorizontal1Filled } from '@fluentui/react-icons';
 
 type PositionCell = {
   label: number;
@@ -19,6 +20,7 @@ type PositionCell = {
 };
 
 type TeamCell = {
+  teamId: string;
   label: string;
   icon?: string;
 };
@@ -33,9 +35,7 @@ export type GridItem = {
   lost: number;
   goalsFor: number;
   goalsAgainst: number;
-  // Can be calculated
-  goalDifference: number;
-  // Can be calculated
+  // TODO Can be calculated
   points: number;
   form: string[];
   nextTeam: string;
@@ -153,7 +153,7 @@ const columns: TableColumnDefinition<GridItem>[] = [
   createTableColumn<GridItem>({
     columnId: 'goalDifference',
     compare: (a, b) => {
-      return a.goalDifference - b.goalDifference;
+      return a.goalsFor - a.goalsAgainst - (b.goalsFor - b.goalsAgainst);
     },
     renderHeaderCell: () => {
       return 'GD';
@@ -174,18 +174,37 @@ const columns: TableColumnDefinition<GridItem>[] = [
       return item.points;
     },
   }),
-  // createTableColumn<GridItem>({
-  //   columnId: 'lastUpdate',
-  //   compare: (a, b) => {
-  //     return a.lastUpdate.label.localeCompare(b.lastUpdate.label);
-  //   },
-  //   renderHeaderCell: () => {
-  //     return 'Last update';
-  //   },
-  //   renderCell: (item) => {
-  //     return <TableCellLayout media={item.lastUpdate.icon}>{item.lastUpdate.label}</TableCellLayout>;
-  //   },
-  // }),
+  createTableColumn<GridItem>({
+    columnId: 'form',
+    renderHeaderCell: () => {
+      return 'Form';
+    },
+    renderCell: (item) => {
+      return <>Form</>;
+    },
+  }),
+  createTableColumn<GridItem>({
+    columnId: 'nextTeam',
+    renderHeaderCell: () => {
+      return 'Next';
+    },
+    renderCell: (item) => {
+      return <TableCellLayout media={item.nextTeam}></TableCellLayout>;
+    },
+  }),
+  createTableColumn<GridItem>({
+    columnId: 'action',
+    renderHeaderCell: () => {
+      return '';
+    },
+    renderCell: (item) => {
+      return (
+        <Button as="a" href={`/team/${item.team.teamId}`} target="_blank" icon={<EyeFilled />} title="View team">
+          View
+        </Button>
+      );
+    },
+  }),
 ];
 
 type LadderTableProps = {};
@@ -198,7 +217,7 @@ const LadderTable = (props: LadderTableProps) => {
       sortable
       getRowId={(item) => item.id}
       onSelectionChange={(e, data) => console.log(data)}
-      focusMode="composite"
+      focusMode="none"
     >
       <DataGridHeader>
         <DataGridRow>
